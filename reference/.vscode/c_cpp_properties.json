@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/include",
+                "/usr/include",
+                "/usr/include/c++/12.1.0",
+                "/usr/include/c++/12.1.0/ext",
+                "/usr/include/eigen3",
+                "/usr/include/c++/12.1.0/x86_64-pc-linux-gnu",
+                "/usr/include/linux",
+                "/usr/include/c++/12.1.0/tr1",
+                "/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
