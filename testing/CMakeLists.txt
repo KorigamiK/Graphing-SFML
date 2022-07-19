@@ -13,6 +13,7 @@ project(
   LANGUAGES CXX
 )
 
+set (CMAKE_CXX_STANDARD 20)
 
 include(CTest)
 enable_testing()
@@ -22,7 +23,6 @@ set(CPACK_PROJECT_VERSION ${LOCAL_PROJECT_VERSION})
 
 # Header files (relative to "include" directory)
 set(HEADERS
-    header.h
 )
 
 # Source files (relative to "src" directory)
@@ -45,8 +45,6 @@ list(TRANSFORM SOURCES PREPEND "src/")
 
 SET( CMAKE_EXE_LINKER_FLAGS   "-L/usr/local/lib")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" -std=c++18)
-
 add_executable(${LOCAL_PROJECT_NAME})
 
 set(OpenGL_GL_PREFERENCE "GLVND")
@@ -67,8 +65,10 @@ target_link_directories(${LOCAL_PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(${LOCAL_PROJECT_NAME}
+  sfml-graphics
+  sfml-system
+  sfml-window
   ${OPENGL_LIBRARIES}
-  ${SFML_LIBRARIES}
 )
 
 set_target_properties(${LOCAL_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "bin/")
@@ -79,9 +79,9 @@ target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
 target_compile_definitions(${LOCAL_PROJECT_NAME} PRIVATE ${DEFINES})
 target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
 
-message(STATUS "OpenCV library status:")
-message(STATUS "    version: ${OpenCV_VERSION}")
-message(STATUS "    libraries: ${OpenCV_LIBS}")
-message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "SFML library status:")
+message(STATUS "    version: ${SFML_VERSION}")
+message(STATUS "    libraries:   ${SFML_LIBRARIES}")
+message(STATUS "    include path: ${SFML_INCLUDE_DIR}")
 
 include(CPack)
