@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/OpenGL.hpp>
 #include <cmath>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
@@ -64,6 +66,7 @@ int main(int argc, char const *argv[])
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Math Functions");
 
 redraw:
+    cout << "redraw" << endl;
     window.clear(sf::Color::Black);
     plot((vector<pair<float (*)(float), sf::Color>>){
              {&sin, sf::Color::Green},
@@ -72,12 +75,12 @@ redraw:
              {&log, sf::Color::Red},
              {&customPlotFunction, sf::Color::White},
          },
-         -3.0f, 5.0f, 0.0001f, -20.0f, 20.0f, sf::Color::White, window);
+         -5.0f, 5.0f, 0.01f, -20.0f, 20.0f, sf::Color::White, window);
     window.display();
 
     while (window.isOpen())
     {
-        sf::sleep(sf::milliseconds(30));
+        sf::sleep(sf::milliseconds(300));
         sf::Event event;
         while (window.pollEvent(event))
             switch (event.type)
@@ -86,7 +89,6 @@ redraw:
                 window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
                 goto redraw;
 
-            case sf::Event::KeyPressed:
             case sf::Event::Closed:
                 window.close();
                 break;
@@ -101,7 +103,7 @@ redraw2:
     window2.display();
     while (window2.isOpen())
     {
-        sf::sleep(sf::milliseconds(30));
+        // sf::sleep(sf::milliseconds(30));
         sf::Event event;
         while (window2.pollEvent(event))
             switch (event.type)

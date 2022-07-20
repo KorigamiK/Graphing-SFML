@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.css": "css",
+        "*.crawljob": "json",
+        ".gitignore": "ignore",
+        "cmath": "cpp"
+    }
+}
