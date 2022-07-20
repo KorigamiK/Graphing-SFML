@@ -3,6 +3,7 @@
         "*.css": "css",
         "*.crawljob": "json",
         ".gitignore": "ignore",
-        "limits": "cpp"
+        "limits": "cpp",
+        "iostream": "cpp"
     }
 }

@@ -299,7 +299,7 @@ int main(int argc, char *argv[])
   if (!font.loadFromMemory(res_font.ptr, res_font.size))
   {
     std::cerr << "FATAL: Failed to load font." << std::endl;
-    // system("pause");
+    system("pause");
     return 1;
   }
 
