@@ -51,11 +51,11 @@ set(OpenGL_GL_PREFERENCE "GLVND")
 
 find_package(OpenGL REQUIRED)
 find_package(SFML 2 REQUIRED COMPONENTS graphics window system)
-find_package(Eigen3 REQUIRED)
+#find_package(Eigen3 REQUIRED)
 
 target_include_directories(${LOCAL_PROJECT_NAME} PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include 
-  ${EIGEN3_INCLUDE_DIR}
+  #${EIGEN3_INCLUDE_DIR}
   ${SFML_INCLUDE_DIR}
 )
 

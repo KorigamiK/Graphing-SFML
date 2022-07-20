@@ -15,6 +15,29 @@
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64"
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${default}",
+                "C:\\mingw64\\include",
+                "C:\\mingw64\\include\\c++\\",
+                "C:/mingw64/include/c++/11.2.0",
+                "C:\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\11.2.0\\include",
+                "C:/mingw64/include/c++/11.2.0/x86_64-w64-mingw32",
+                "C:/mingw64/include/c++/11.2.0/tr1",
+                "C:\\mingw64\\x86_64-w64-mingw32\\include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/mingw64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
