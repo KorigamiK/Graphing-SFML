@@ -29,11 +29,11 @@ auto drawUtil::drawBackground(double t) -> void
             const Eigen::Vector2d b((double)x + i * 0.25, (double)max_y);
             if (i == 0)
             {
-                DrawLine(a, b, sf::Color::White, false, 2.0 * bounce);
+                drawLine(a, b, sf::Color::White, false, 2.0 * bounce);
             }
             else
             {
-                DrawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
+                drawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
             }
         }
     }
@@ -51,12 +51,49 @@ auto drawUtil::drawBackground(double t) -> void
             const Eigen::Vector2d b((double)max_x, (double)y + i * 0.25);
             if (i == 0)
             {
-                DrawLine(a, b, sf::Color::White, false, 2.0 * bounce);
+                drawLine(a, b, sf::Color::White, false, 2.0 * bounce);
             }
             else
             {
-                DrawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
+                drawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
             }
         }
     }
+}
+
+void drawUtil::drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, const sf::Color &color, bool extend, double thickness)
+{
+    std::vector<sf::Vertex> vertex_array(2);
+    Eigen::Vector2d a, b;
+    if (extend)
+    {
+        a = _a + (_a - _b).normalized() * 100.0;
+        b = _b + (_b - _a).normalized() * 100.0;
+    }
+    else
+    {
+        a = _a;
+        b = _b;
+    }
+    vertex_array[0] = sf::Vertex(toSF((a - center) * scale + halfSize()), color);
+    vertex_array[1] = sf::Vertex(toSF((b - center) * scale + halfSize()), color);
+    glLineWidth((float)thickness * application.renderScale);
+    application.window.draw(vertex_array.data(), vertex_array.size(), sf::PrimitiveType::Lines);
+}
+
+void drawUtil::drawAxes(const sf::Color &color1, const sf::Color &color2, double thickness)
+{
+    const auto &window = application.window;
+    const int min_x = int(center.x() - 0.5 * double(window.getSize().x) / scale) - 1;
+    const int max_x = int(center.x() + 0.5 * double(window.getSize().x) / scale) + 1;
+    const int min_y = int(center.y() - 0.5 * double(window.getSize().y) / scale) - 1;
+    const int max_y = int(center.y() + 0.5 * double(window.getSize().y) / scale) + 1;
+
+    const Eigen::Vector2d ay((double)0, (double)min_y);
+    const Eigen::Vector2d by(0, (double)max_y);
+    drawLine(ay, by, color1, false, thickness);
+
+    const Eigen::Vector2d ax((double)min_x, 0);
+    const Eigen::Vector2d bx((double)max_x, 0);
+    drawLine(ax, bx, color2, false, thickness);
 }

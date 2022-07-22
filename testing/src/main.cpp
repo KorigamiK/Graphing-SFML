@@ -17,7 +17,7 @@ void plot(T1 (*f)(T2), T2 begin, T2 last, T2 step, T1 yMin, T1 yMax, sf::Color p
         xAxis.setPosition(0, yMax / (yMax - yMin) * window.getSize().y);
         xAxis.setFillColor(axisColor);
         yAxis.setSize(sf::Vector2f(1, window.getSize().y));
-        yAxis.setPosition((-begin) / (last - begin) * window.getSize().x, 0);
+        yAxis.setPosition((float)(-begin) / (last - begin) * window.getSize().x, 0);
         yAxis.setFillColor(axisColor);
         window.draw(xAxis), window.draw(yAxis);
     }

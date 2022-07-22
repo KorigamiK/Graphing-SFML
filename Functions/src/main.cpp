@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 
     drawUtil draw(app);
 
-    draw.DrawAxes(sf::Color::Cyan, sf::Color::Red, 10.0);
+    draw.drawAxes(sf::Color::Cyan, sf::Color::Red, 10.0);
 
     while (app.window.isOpen())
     {
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
             app.eventHandler(event);
 
         draw.drawBackground(1.0);
-        draw.DrawAxes(sf::Color::Magenta, sf::Color::Red, 10.0);
+        draw.drawAxes(sf::Color::Magenta, sf::Color::Red, 10.0);
         draw.display();
         app.window.display();
     }

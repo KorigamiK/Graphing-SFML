@@ -32,7 +32,8 @@ Application::Application()
 
 void Application::eventHandler(sf::Event &event)
 {
-    static sf::FloatRect visibleArea;
+    static sf::FloatRect visibleArea = sf::FloatRect(0, 0, event.size.width, event.size.height);
+
     switch (event.type)
     {
     case sf::Event::Closed:
@@ -41,7 +42,8 @@ void Application::eventHandler(sf::Event &event)
 
     case sf::Event::Resized:
     {
-        visibleArea = sf::FloatRect(0, 0, (float)event.size.width, (float)event.size.height);
+        visibleArea.width = event.size.width;
+        visibleArea.height = event.size.height;
         window.setView(sf::View(visibleArea));
         renderTexture.create(window.getSize().x * renderScale, window.getSize().y * renderScale, settings);
         renderTexture.setSmooth(true);

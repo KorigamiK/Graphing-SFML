@@ -1,11 +1,12 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 
 class Application
 {
-
+private:
     sf::VideoMode screenSize;
     sf::ContextSettings settings;
     sf::View view;
