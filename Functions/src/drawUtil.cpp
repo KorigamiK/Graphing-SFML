@@ -97,3 +97,23 @@ void drawUtil::drawAxes(const sf::Color &color1, const sf::Color &color2, double
     const Eigen::Vector2d bx((double)max_x, 0);
     drawLine(ax, bx, color2, false, thickness);
 }
+
+void drawUtil::drawPoint(const Eigen::Vector2d &c, const sf::Color &color, double radius)
+{
+    sf::CircleShape circle((float)radius * application.renderScale);
+    circle.setOrigin(circle.getRadius(), circle.getRadius());
+    circle.setFillColor(color);
+    circle.setPosition(toSF((c - center) * scale + halfSize()));
+    application.window.draw(circle);
+}
+
+void drawUtil::drawCircle(float radius, const sf::Color &colour, float thickness)
+{
+    sf::CircleShape circle(float(radius), 50);
+    circle.setOrigin(circle.getRadius(), circle.getRadius());
+    circle.setFillColor(sf::Color::Transparent);
+    circle.setOutlineColor(colour);
+    circle.setOutlineThickness((float)thickness);
+    circle.setPosition(toSF((center - center) * scale + halfSize()));
+    application.window.draw(circle);
+}

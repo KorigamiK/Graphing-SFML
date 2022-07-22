@@ -3,6 +3,7 @@
         "*.css": "css",
         "*.crawljob": "json",
         ".gitignore": "ignore",
-        "random": "cpp"
+        "random": "cpp",
+        "cmath": "cpp"
     }
 }
