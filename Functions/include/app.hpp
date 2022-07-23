@@ -4,9 +4,16 @@
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 
+#include "userInteraction.hpp"
+
+// Singleton application
 class Application
 {
 private:
+    Application();
+
+    static Application _instance;
+
     sf::VideoMode screenSize;
     sf::ContextSettings settings;
     sf::View view;
@@ -17,11 +24,16 @@ private:
     const char *title = "Test SFML - By KorigamiK";
 
 public:
+    bool watchTextInput = false;
+    std::string textInputString = "";
+
+    Application(const Application &) = delete;
+
     friend class drawUtil;
 
-    sf::RenderWindow window;
+    static Application &get() { return _instance; };
 
-    Application();
+    sf::RenderWindow window;
 
     void eventHandler(sf::Event &event);
 

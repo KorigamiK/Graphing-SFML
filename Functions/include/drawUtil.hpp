@@ -5,21 +5,30 @@
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 
+// Singleton drawUtils
 class drawUtil
 {
 private:
+    static drawUtil _instance;
+
     Application &application;
     sf::RenderTexture &renderTexture;
     Eigen::Vector2d center = Eigen::Vector2d::Zero();
+
+    inline drawUtil() : application(Application::get()), renderTexture(application.renderTexture){};
 
     static double smoothBounce(long double t, long double trigger_t, long double a);
 
     inline static sf::Vector2f toSF(const Eigen::Vector2d &v) { return sf::Vector2f(v.x(), v.y()); }
 
 public:
-    long double scale = 100.0l;
+    drawUtil(const drawUtil &) = delete;
 
-    inline drawUtil(Application &app) : application(app), renderTexture(app.renderTexture){};
+    static drawUtil &get() { return _instance; }
+
+    friend class userInteraction;
+
+    long double scale = 100.0l;
 
     inline Eigen::Vector2d halfSize() { return Eigen::Vector2d(application.window.getSize().x, application.window.getSize().y) * 0.5; }
 

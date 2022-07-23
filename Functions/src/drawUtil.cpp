@@ -1,5 +1,7 @@
 #include "drawUtil.hpp"
 
+drawUtil drawUtil::_instance;
+
 auto drawUtil::smoothBounce(long double t, long double trigger_t, long double a) -> double
 {
     return std::max(1.0 + a * (1.0 - t) * std::exp(10 * (trigger_t - t)) * (1.0 - std::exp(trigger_t - t)), 0.0l);

@@ -1,5 +1,7 @@
 #include "app.hpp"
 
+Application Application::_instance;
+
 Application::Application()
 {
     screenSize = sf::VideoMode::getDesktopMode();
@@ -52,15 +54,24 @@ void Application::eventHandler(sf::Event &event)
     }
 
     case sf::Event::KeyPressed:
-        switch (event.key.code)
-        {
-        case sf::Keyboard::Escape:
-            window.close();
-            break;
-        default:
-            break;
-        }
-        break;
+        if (watchTextInput)
+            if (event.text.unicode < 128)
+            {
+                textInputString += static_cast<char>(event.text.unicode);
+                userInteraction::get().echoText();
+            }
+            else
+            {
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Escape:
+                    window.close();
+                    break;
+                default:
+                    break;
+                }
+                break;
+            }
 
     default:
         break;

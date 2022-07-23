@@ -8,16 +8,18 @@ constexpr float function(float x)
 
 constexpr float func2(float x)
 {
-    return x * x * x;
+    return sqrt(x);
 }
 
 int main(int argc, char const *argv[])
 {
-    Application app;
+    Application &app = Application::get();
 
-    drawUtil draw(app);
+    auto &draw = drawUtil::get();
 
     draw.drawAxes(sf::Color::Cyan, sf::Color::Red, 10.0);
+
+    app.watchTextInput = true;
 
     while (app.window.isOpen())
     {
@@ -26,7 +28,7 @@ int main(int argc, char const *argv[])
             app.eventHandler(event);
 
         draw.drawBackground(1.0);
-        draw.drawAxes(sf::Color::Magenta, sf::Color::Red, 10.0);
+        draw.drawAxes(sf::Color::Black, sf::Color::Black, 6.0);
         draw.plotFuntion(&function, sf::Color::White, 0.01f, 4, -(float)(5));
         draw.plotFuntion(&func2, sf::Color::Cyan, 0.01f, 4, -(float)(5));
 
