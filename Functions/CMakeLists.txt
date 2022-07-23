@@ -23,8 +23,10 @@ set(CPACK_PROJECT_VERSION ${LOCAL_PROJECT_VERSION})
 
 # Header files (relative to "include" directory)
 set(HEADERS
-  app.hpp
-  drawUtil.hpp
+    app.hpp
+    drawUtil.hpp
+    userInteraction.hpp
+    Objects/TextBox.hpp
 )
 
 # Source files (relative to "src" directory)
@@ -32,6 +34,8 @@ set(SOURCES
     main.cpp
     app.cpp
     drawUtil.cpp
+    userInteraction.cpp
+    Objects/TextBox.cpp
 )
 
 # Compiler definitions
@@ -76,6 +80,8 @@ target_link_libraries(${LOCAL_PROJECT_NAME}
 )
 
 set_target_properties(${LOCAL_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "bin/")
+file(COPY "res" DESTINATION "bin")
+
 
 target_compile_definitions(${LOCAL_PROJECT_NAME} PRIVATE ${DEFINES})
 target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
@@ -85,7 +91,6 @@ target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
 
 message(STATUS "SFML library status:")
 message(STATUS "    version: ${SFML_VERSION}")
-message(STATUS "    libraries:   ${SFML_LIBRARIES}")
-message(STATUS "    include path: ${SFML_INCLUDE_DIR}")
+
 
 include(CPack)

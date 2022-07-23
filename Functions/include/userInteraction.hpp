@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Objects/TextBox.hpp"
 
 // User interaction singleton class
 class userInteraction
@@ -14,5 +15,5 @@ public:
     static userInteraction &get() { return _instance; }
     userInteraction(const userInteraction &) = delete;
 
-    void echoText();
+    void echoText(sf::Event &event, TextBox &textbox);
 };

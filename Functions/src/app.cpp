@@ -30,9 +30,14 @@ Application::Application()
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_POINT_SMOOTH);
     glEnable(GL_SMOOTH);
+
+    // Load fonts
+
+    if (!textFont.loadFromFile("./res/terminal.otf"))
+        std::cerr << "Error loading font\n";
 }
 
-void Application::eventHandler(sf::Event &event)
+void Application::eventHandler(sf::Event &event, TextBox &textbox)
 {
     static sf::FloatRect visibleArea = sf::FloatRect(0, 0, event.size.width, event.size.height);
 
@@ -54,25 +59,26 @@ void Application::eventHandler(sf::Event &event)
     }
 
     case sf::Event::KeyPressed:
-        if (watchTextInput)
-            if (event.text.unicode < 128)
-            {
-                textInputString += static_cast<char>(event.text.unicode);
-                userInteraction::get().echoText();
-            }
-            else
-            {
-                switch (event.key.code)
-                {
-                case sf::Keyboard::Escape:
-                    window.close();
-                    break;
-                default:
-                    break;
-                }
-                break;
-            }
+        switch (event.key.code)
+        {
+        case sf::Keyboard::Pause:
+            window.close();
+            break;
+        default:
+            break;
+        }
+        break;
 
+    case sf::Event::TextEntered:
+        if (event.text.unicode < 128)
+        {
+            textInputString += static_cast<char>(event.text.unicode);
+            if (event.text.unicode == ENTER_KEY)
+                textbox.setSelected(true);
+            else if (event.text.unicode == ESCAPE_KEY)
+                textbox.setSelected(false);
+            userInteraction::get().echoText(event, textbox);
+        }
     default:
         break;
     }

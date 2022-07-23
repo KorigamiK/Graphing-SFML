@@ -1,10 +1,10 @@
 #include "userInteraction.hpp"
-
 #include "app.hpp"
+#include "Objects/TextBox.hpp"
 
 userInteraction userInteraction::_instance;
 
-void userInteraction::echoText()
+void userInteraction::echoText(sf::Event &event, TextBox &textbox)
 {
-    std::cout << Application::get().textInputString;
+    textbox.typedOn(event);
 }
