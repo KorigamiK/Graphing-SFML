@@ -33,7 +33,7 @@ Application::Application()
 
     // Load fonts
 
-    if (!textFont.loadFromFile("./res/terminal.otf"))
+    if (!textFont.loadFromFile("./res/font.ttf"))
         std::cerr << "Error loading font\n";
 }
 

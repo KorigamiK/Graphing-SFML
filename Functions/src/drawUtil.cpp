@@ -15,7 +15,7 @@ auto drawUtil::drawBackground(double t) -> void
     const int min_y = int(center.y() - 0.5 * double(window.getSize().y) / scale) - 1;
     const int max_y = int(center.y() + 0.5 * double(window.getSize().y) / scale) + 1;
 
-    window.clear(sf::Color(0, 42, 77));
+    window.clear(sf::Color(221, 208, 195));
 
     for (int x = min_x; x < max_x; ++x)
     {
@@ -31,11 +31,11 @@ auto drawUtil::drawBackground(double t) -> void
             const Eigen::Vector2d b((double)x + i * 0.25, (double)max_y);
             if (i == 0)
             {
-                drawLine(a, b, sf::Color::White, false, 2.0 * bounce);
+                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce);
             }
             else
             {
-                drawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
+                drawLine(a, b, sf::Color(190, 160, 147), false, bounce);
             }
         }
     }
@@ -53,11 +53,11 @@ auto drawUtil::drawBackground(double t) -> void
             const Eigen::Vector2d b((double)max_x, (double)y + i * 0.25);
             if (i == 0)
             {
-                drawLine(a, b, sf::Color::White, false, 2.0 * bounce);
+                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce);
             }
             else
             {
-                drawLine(a, b, sf::Color(255, 255, 255, 128), false, bounce);
+                drawLine(a, b, sf::Color(190, 160, 147), false, bounce);
             }
         }
     }

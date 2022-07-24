@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Objects/TextBox.hpp"
+#include <exprtk.hpp>
 
+#include "Objects/TextBox.hpp"
 // User interaction singleton class
 class userInteraction
 {

@@ -57,14 +57,18 @@ add_executable(${LOCAL_PROJECT_NAME})
 
 set(OpenGL_GL_PREFERENCE "GLVND")
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
 find_package(OpenGL REQUIRED)
 find_package(SFML 2 REQUIRED COMPONENTS graphics window system)
 find_package(Eigen3 REQUIRED)
+find_package(ExprTk REQUIRED)
 
 target_include_directories(${LOCAL_PROJECT_NAME} PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/include 
-  ${EIGEN3_INCLUDE_DIR}
-  ${SFML_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include 
+    ${EIGEN3_INCLUDE_DIR}
+    ${SFML_INCLUDE_DIR}
+    ${EXPRTK_INCLUDE_DIR}
 )
 
 target_sources(${LOCAL_PROJECT_NAME} PUBLIC ${SOURCES} ${HEADERS})
