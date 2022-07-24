@@ -1,4 +1,5 @@
 #pragma once
+
 #include "app.hpp"
 #include <Eigen/Dense>
 #include <SFML/Graphics.hpp>

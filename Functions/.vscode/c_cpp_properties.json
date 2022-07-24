@@ -19,6 +19,26 @@
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64"
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${default}",
+                "C:\\msys64\\vcpkg\\installed\\x64-mingw-dynamic\\include",
+                "C:\\msys64\\mingw64\\include\\c++\\12.1.0",
+                "${workspaceFolder}/include",
+                "C:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\12.1.0\\include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "_WIN32"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4

@@ -9,7 +9,12 @@ Application::Application()
 
     settings.depthBits = 24;
     settings.stencilBits = 8;
+
+#ifdef _WIN32
+    settings.antialiasingLevel = 8;
+#else
     settings.antialiasingLevel = 16;
+#endif
 
     sf::Uint32 window_style = (sf::Style::Resize | sf::Style::Close);
 
@@ -25,11 +30,14 @@ Application::Application()
 
     // Setup OpenGL things
 
-    glHint(GL_POINT_SMOOTH, GL_NICEST);
-    glHint(GL_LINE_SMOOTH, GL_NICEST);
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_POINT_SMOOTH);
+
+#ifndef _WIN32
+    glHint(GL_POINT_SMOOTH, GL_NICEST);
+    glHint(GL_LINE_SMOOTH, GL_NICEST);
     glEnable(GL_SMOOTH);
+#endif
 
     // Load fonts
 

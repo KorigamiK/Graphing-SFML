@@ -59,10 +59,22 @@ set(OpenGL_GL_PREFERENCE "GLVND")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+if (WIN32)
+  set(SFML_STATIC_LIBRARIES TRUE)
+  set(SFML_DIR "C:\\msys64\\vcpkg\\user\\SFML-2.5.1\\lib\\cmake\\SFML")
+  set(Eigen3_DIR "C:\\msys64\\vcpkg\\installed\\x64-mingw-static\\share\\eigen3")
+  set(EXPRTK_INCLUDE_DIR "C:\\msys64\\vcpkg\\installed\\x64-mingw-static\\include")
+  set(SFML_INCLUDE_DIR "C:\\msys64\\vcpkg\\user\\SFML-2.5.1\\include")
+endif()
+
 find_package(OpenGL REQUIRED)
-find_package(SFML 2 REQUIRED COMPONENTS graphics window system)
+find_package(SFML 2 COMPONENTS system window graphics CONFIG REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(ExprTk REQUIRED)
+
+if(NOT WIN32)
+  find_package(ExprTk REQUIRED)
+endif()
+
 
 target_include_directories(${LOCAL_PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
@@ -77,8 +89,8 @@ target_link_directories(${LOCAL_PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(${LOCAL_PROJECT_NAME}
-  sfml-graphics
   sfml-system
+  sfml-graphics
   sfml-window
   ${OPENGL_LIBRARIES}
 )
@@ -95,6 +107,7 @@ target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
 
 message(STATUS "SFML library status:")
 message(STATUS "    version: ${SFML_VERSION}")
+message(STATUS "    version: ${SFML_LIB_DIR}")
 
 
 include(CPack)
