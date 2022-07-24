@@ -12,7 +12,7 @@ private:
     static drawUtil _instance;
 
     Application &application;
-    sf::RenderTexture &renderTexture;
+    sf::RenderTexture &renderTexture; // for the background
     Eigen::Vector2d center = Eigen::Vector2d::Zero();
 
     inline drawUtil() : application(Application::get()), renderTexture(application.renderTexture){};
@@ -32,12 +32,12 @@ public:
 
     inline Eigen::Vector2d halfSize() { return Eigen::Vector2d(application.window.getSize().x, application.window.getSize().y) * 0.5; }
 
-    auto display() { return renderTexture.display(); }
-
     void drawAxes(const sf::Color &color1, const sf::Color &color2, double thickness);
 
-    void drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, const sf::Color &color, bool extend, double thickness);
+    // draw to window by default for static objects pass renderTexture
+    void drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, const sf::Color &color, bool extend, double thickness, sf::RenderTarget *const renderTo = nullptr);
 
+    // returns pointer to sprite where background is drawn
     void drawBackground(double thickness);
 
     template <typename TDomain, typename TRange>

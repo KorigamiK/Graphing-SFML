@@ -34,7 +34,8 @@ int main(int argc, char const *argv[])
         app.window.clear();
 
         draw.drawBackground(1.0);
-        // draw.drawAxes(sf::Color::Black, sf::Color::Black, 6.0);
+
+        draw.drawAxes(sf::Color(150, 150, 150), sf::Color(150, 150, 150), 6.0);
         draw.plotFuntion(&function, sf::Color(37, 44, 69), 0.01f, 4, -(float)(5));
         draw.plotFuntion(&func2, sf::Color(154, 141, 192), 0.01f, 4, -(float)(5));
 
@@ -44,7 +45,6 @@ int main(int argc, char const *argv[])
 
         draw.drawCircle(50, sf::Color(99, 176, 156), 3);
         textbox.draw();
-        draw.display();
         app.window.display();
     }
 

@@ -5,6 +5,7 @@
 #include <exprtk.hpp>
 
 #include "Objects/TextBox.hpp"
+
 // User interaction singleton class
 class userInteraction
 {

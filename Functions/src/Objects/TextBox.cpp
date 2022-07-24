@@ -66,7 +66,6 @@ std::string TextBox::getText()
 
 void TextBox::draw()
 {
-    Application::get().renderTexture.draw(textbox);
     window.draw(textbox);
 }
 

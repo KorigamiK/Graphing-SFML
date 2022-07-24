@@ -18,7 +18,6 @@ auto drawUtil::drawBackground(double t) -> void
     window.clear(sf::Color(221, 208, 195));
 
     for (int x = min_x; x < max_x; ++x)
-    {
         for (int i = 0; i < 4; ++i)
         {
             const double q = 0.25 * double((x - min_x) * 4 + i) / double(max_x - min_x);
@@ -30,40 +29,29 @@ auto drawUtil::drawBackground(double t) -> void
             const Eigen::Vector2d a((double)x + i * 0.25, (double)min_y);
             const Eigen::Vector2d b((double)x + i * 0.25, (double)max_y);
             if (i == 0)
-            {
-                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce);
-            }
+                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce, &window);
             else
-            {
-                drawLine(a, b, sf::Color(190, 160, 147), false, bounce);
-            }
+                drawLine(a, b, sf::Color(190, 160, 147), false, bounce, &window);
         }
-    }
+
     for (int y = min_y; y < max_y; ++y)
-    {
         for (int i = 0; i < 4; ++i)
         {
             const double q = 0.25 * double((y - min_y) * 4 + i) / double(max_y - min_y);
             const double bounce = smoothBounce(t, q * 0.5, 20.0);
             if (bounce <= 0.0)
-            {
                 continue;
-            }
             const Eigen::Vector2d a((double)min_x, (double)y + i * 0.25);
             const Eigen::Vector2d b((double)max_x, (double)y + i * 0.25);
             if (i == 0)
-            {
-                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce);
-            }
+                drawLine(a, b, sf::Color(94, 45, 45), false, 2.0 * bounce, &window);
             else
-            {
-                drawLine(a, b, sf::Color(190, 160, 147), false, bounce);
-            }
+                drawLine(a, b, sf::Color(190, 160, 147), false, bounce, &window);
         }
-    }
+    // renderTexture.display();
 }
 
-void drawUtil::drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, const sf::Color &color, bool extend, double thickness)
+void drawUtil::drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, const sf::Color &color, bool extend, double thickness, sf::RenderTarget *const renderTo)
 {
     std::vector<sf::Vertex> vertex_array(2);
     Eigen::Vector2d a, b;
@@ -80,7 +68,11 @@ void drawUtil::drawLine(const Eigen::Vector2d &_a, const Eigen::Vector2d &_b, co
     vertex_array[0] = sf::Vertex(toSF((a - center) * scale + halfSize()), color);
     vertex_array[1] = sf::Vertex(toSF((b - center) * scale + halfSize()), color);
     glLineWidth((float)thickness * application.renderScale);
-    application.window.draw(vertex_array.data(), vertex_array.size(), sf::PrimitiveType::Lines);
+
+    if (renderTo != nullptr)
+        renderTo->draw(vertex_array.data(), vertex_array.size(), sf::PrimitiveType::Lines);
+    else
+        application.window.draw(vertex_array.data(), vertex_array.size(), sf::PrimitiveType::Lines);
 }
 
 void drawUtil::drawAxes(const sf::Color &color1, const sf::Color &color2, double thickness)
@@ -116,6 +108,6 @@ void drawUtil::drawCircle(float radius, const sf::Color &colour, float thickness
     circle.setFillColor(sf::Color::Transparent);
     circle.setOutlineColor(colour);
     circle.setOutlineThickness((float)thickness);
-    circle.setPosition(toSF((center - center) * scale + halfSize()));
+    circle.setPosition(toSF((center)*scale + halfSize()));
     application.window.draw(circle);
 }

@@ -52,7 +52,7 @@ void Application::eventHandler(sf::Event &event, TextBox &textbox)
         visibleArea.width = event.size.width;
         visibleArea.height = event.size.height;
         window.setView(sf::View(visibleArea));
-        renderTexture.create(window.getSize().x * renderScale, window.getSize().y * renderScale, settings);
+        renderTexture.create(window.getSize().x, window.getSize().y, settings);
         renderTexture.setSmooth(true);
         renderTexture.setActive(true);
         break;
