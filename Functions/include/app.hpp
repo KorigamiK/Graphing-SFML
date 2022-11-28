@@ -21,7 +21,7 @@ private:
 
     static const int start_w = 480, start_h = 360;
     constexpr static const float renderScale = 0.5f;
-    const char *title = "Test SFML - By KorigamiK";
+    const char *title = "Functions in SFML - By KorigamiK";
 
 public:
     bool watchTextInput = false;
